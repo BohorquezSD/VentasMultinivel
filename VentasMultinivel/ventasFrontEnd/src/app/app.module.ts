@@ -3,11 +3,15 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { RegistroClienteComponent } from './registro-cliente/registro-cliente.component';
+import { RegistroVentaComponent } from './registro-venta/registro-venta.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RegistroClienteComponent,
+    RegistroVentaComponent
   ],
   imports: [
     BrowserModule

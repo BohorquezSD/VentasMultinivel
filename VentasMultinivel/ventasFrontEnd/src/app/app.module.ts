@@ -1,10 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { FormsModule } from '@angular/forms';
+
+import { AppRoutingModule } from './app-routing/app-routing.module';
+
+import { HttpModule } from '@angular/http'
 
 import { AppComponent } from './app.component';
 import { RegistroClienteComponent } from './registro-cliente/registro-cliente.component';
 import { RegistroVentaComponent } from './registro-venta/registro-venta.component';
+
+import { ConexionOracleService } from './service/conexion-oracle.service';
 
 
 @NgModule({
@@ -14,9 +21,14 @@ import { RegistroVentaComponent } from './registro-venta/registro-venta.componen
     RegistroVentaComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
+    HttpModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    ConexionOracleService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,6 +11,9 @@
   <li>
     <a routerLink="registroVenta"> Registrar Venta </a>
   </li>
+  <li *ngIf="dba">
+    <a routerLink="administraPriv"> Revisar roles </a>
+  </li>
   <li>
     <a routerLink="" (click)="logout()"> Salir </a>
   </li>
@@ -27,7 +30,6 @@
 </div>
 <br>
 
-
 <router-outlet></router-outlet>
 
 <div class="center" style="text-align:center;">
@@ -39,6 +41,6 @@
 <div class="color-ligth center " *ngIf="logged">
 
   <form>
-    <input (click)="logout()" class="btn" type="submit" value="Salir" style="margin: auto">
+    <input (click)="logout()" routerLink="" class="btn" type="submit" value="Salir" style="margin: auto">
   </form>
 </div>

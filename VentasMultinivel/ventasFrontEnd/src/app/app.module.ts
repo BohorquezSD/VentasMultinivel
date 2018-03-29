@@ -12,13 +12,15 @@ import { RegistroClienteComponent } from './registro-cliente/registro-cliente.co
 import { RegistroVentaComponent } from './registro-venta/registro-venta.component';
 
 import { ConexionOracleService } from './service/conexion-oracle.service';
+import { AdministraPrivComponent } from './administra-priv/administra-priv.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistroClienteComponent,
-    RegistroVentaComponent
+    RegistroVentaComponent,
+    AdministraPrivComponent
   ],
   imports: [
     BrowserModule,

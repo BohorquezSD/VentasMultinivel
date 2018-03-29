@@ -14,15 +14,17 @@ export class AppComponent implements OnInit {
 
   }
 
-  user = {
+  public user = {
     name: "",
     pass: "",
   };
-  logged = false;
-  title = 'VENTAS MULTINIVEL';
+  public logged = false;
+  public texto: string = "";
+  public title = 'VENTAS MULTINIVEL';
 
-  hora = new Date();
+  public hora = new Date();
 
+  public dba = false;
 
   constructor(private backEnd: ConexionOracleService) {
     setInterval(() => {
@@ -34,22 +36,28 @@ export class AppComponent implements OnInit {
     localStorage.removeItem("user");
     localStorage.removeItem("pass");
     this.logged = false;
-  }
 
+  }
   login() {
-    this.backEnd.getLogin(this.user.name, this.user.pass).toPromise()
-      .then((res: any) => {
-        this.logged = true;
-      })
-      .catch(() => {
-        this.logged = false;
-        localStorage.removeItem("user");
-        localStorage.removeItem("pass");
-        alert("Usuario/contraseña erroneos");
+    this.backEnd.getLogin(this.user.name, this.user.pass).subscribe(
+      respuesta => {
+        let jsonRespuesta = respuesta.json();
+        this.texto=jsonRespuesta.nombre;
+        if (this.texto == this.user.name) {
+          this.logged = true;
+        } else {
+          alert("Usuario/contraseña erroneos \n" + this.texto);
+        }  
+        this.isDBA();
+        this.user.name = "";
+        this.user.pass = "";
+        
       });
-    this.user.name = "";
-    this.user.pass = "";
   }
-
+  isDBA(){
+    if(localStorage.getItem("user") == "system"){
+      this.dba = true;
+    }
+  }
 
 }

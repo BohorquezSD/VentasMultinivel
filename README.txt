@@ -2,7 +2,7 @@ Aplicativo de tipo cliente servidor para la realizacion de un sistema de ventas 
 
 Para correr FrontEnd:
 	tener angular, npm instalado
-	correr el comando npm install en la carpeta ventasBackEnd para traer las dependencias
+	correr el comando npm install en la carpeta ventasFrontEnd para traer las dependencias
 	
 Para correr BackEnd:
 	ejecutar en netbeans

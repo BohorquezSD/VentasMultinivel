@@ -1,14 +1,15 @@
-  <div class="color-ligth center" >
-    <form>
-      <input [(ngModel)]="user.name" name="nombre" class="txt" placeholder="Digite su usuario">
+  <div >
+    <form class="center" >
+      <input [(ngModel)]="busqueda" name="nombre" class="txt" placeholder="Digite su usuario">
     
-      <input (click)="login()" class="btn" type="submit" value="Ingresar" style="margin: auto">
+      <input   (click)="verRoles()" class="btn" type="submit" value="Buscar Roles" style="width: 48%; float:left; margin:2px">
+      <input  (click)="verPrivilegios()" class="btn" type="submit" value="Buscar Privilegios" style="width: 48%; float:rigth; margin:2px" >
     </form>
   </div>
   <br>
-<table class="table table-hover">
+<table class="center" *ngIf ="roles">
   <thead>
-    <tr>
+    <tr class="center">
       <th>ROL</th>
       <th>ADM</th>
       <th>DEF</th>
@@ -16,16 +17,30 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let rol of roles , let adm of adms, let def of defs">
-      <td> {{rol}}</td>
-      <td> {{adm}}</td>
-      <td> {{def}}</td>
-      
-      <td>
-        <button class="btn btn-primary" (click)="leerCalificacion(respuesta.id,respuesta.matriz.id)">
-          <i class="fa fa-eye" aria-hidden="true"></i> Detalle
-        </button>
-      </td>
+    <tr *ngFor="let role of roles" >
+      <td> {{role.RoleAsociado}}</td>
+      <td> {{role.adm}}</td>
+      <td> {{role.def}}</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="center" *ngIf="privs">
+  <thead>
+    <tr class="center">
+      <th>PRIVILEGIO</th>
+      <th>ADM</th>
+      <th>DEF</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let privilegio of privs">
+      <td> {{role.RoleAsociado}}</td>
+      <td> {{role.adm}}</td>
+      <td> {{role.def}}</td>
+      <td> </td>
     </tr>
   </tbody>
 </table>

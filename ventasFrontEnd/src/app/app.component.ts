@@ -14,16 +14,17 @@ export class AppComponent implements OnInit {
 
   }
 
-  user = {
+  public user = {
     name: "",
     pass: "",
   };
-  logged = false;
-  texto: string = "";
-  title = 'VENTAS MULTINIVEL';
+  public logged = false;
+  public texto: string = "";
+  public title = 'VENTAS MULTINIVEL';
 
-  hora = new Date();
+  public hora = new Date();
 
+  public dba = false;
 
   constructor(private backEnd: ConexionOracleService) {
     setInterval(() => {
@@ -35,6 +36,7 @@ export class AppComponent implements OnInit {
     localStorage.removeItem("user");
     localStorage.removeItem("pass");
     this.logged = false;
+
   }
   login() {
     this.backEnd.getLogin(this.user.name, this.user.pass).subscribe(
@@ -46,13 +48,15 @@ export class AppComponent implements OnInit {
         } else {
           alert("Usuario/contraseña erroneos \n" + this.texto);
         }  
+        this.isDBA();
         this.user.name = "";
         this.user.pass = "";
+        
       });
   }
   isDBA(){
-    if(this.user.name=="system"){
-      return true;
+    if(localStorage.getItem("user") == "system"){
+      this.dba = true;
     }
   }
 

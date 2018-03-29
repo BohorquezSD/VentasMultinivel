@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConexionOracleService } from '../service/conexion-oracle.service';
+import { Role } from '../roles/role'
+import { Privilegio } from '../privilegios/privilegio'
 
 @Component({
   selector: 'app-administra-priv',
@@ -12,22 +14,34 @@ export class AdministraPrivComponent implements OnInit {
 
   public busqueda :string;
   public roles;
-  public adms;
-  public defs;
-
-  public rol;
-
+  public privs;
+  
+  public privilegio: Privilegio = new Privilegio();
+  public role :Role =new Role();
 
   ngOnInit() {
   }
 
   verRoles() {
-    this.backEnd.getRoles(this.busqueda).subscribe(
+    this.backEnd.getRoles(this.busqueda, null).subscribe(
       respuesta => {
         let jsonRespuesta = respuesta.json();
-        this.roles = jsonRespuesta.RoleAsociado;
-        this.adms = jsonRespuesta.adm;
-        this.defs = jsonRespuesta.def;
+        if (jsonRespuesta.roles) {
+          this.roles = jsonRespuesta.roles;
+        } else {
+          alert("Privilegios insuficientes \n" + jsonRespuesta.error);
+        }  
+      });
+  }
+  verPrivilegios() {
+    this.backEnd.getPrivilegios(this.busqueda, null).subscribe(
+      respuesta => {
+        let jsonRespuesta = respuesta.json();
+        if (jsonRespuesta.privs) {
+          this.privs = jsonRespuesta.privs;
+        } else {
+          alert("Privilegios insuficientes \n" + jsonRespuesta.error);
+        }
       });
   }
 }

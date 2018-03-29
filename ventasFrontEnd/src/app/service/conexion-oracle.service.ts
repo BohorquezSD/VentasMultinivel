@@ -87,14 +87,34 @@ export class ConexionOracleService {
     return this.oracleGet("login", null);
   }
 
-  getRoles(search:string){
+  getRoles(search: string, parametros: any){
     return this.http.get(this.url + "verRoles", {
       headers: this.headers,
-      params: new URLSearchParams(this.addUserParams("")).toString() + "&search"+ search,
+      params: new URLSearchParams(this.addUserParams(parametros)).toString() + "&search=" + search,
     }).catch((error: Response) => {
       if (error.status === 0) {
         //Conexión reusada, no hay conexión con el servidor
-        alert("Se ha producido un error. No hay conexión con el servidor")
+        alert(error.statusText)
+      }
+      else if (error.status === 500) {
+        //Error interno del servidor
+        alert("Se ha producido un error. Error interno en el servidor");
+      } else if (error.status === 502) {
+        //Bad gateway, servicio externo no respondió
+        alert("Servicio externo inaccesible. Intente nuevamentes más tarde.");
+      }
+      return Observable.throw(error.json().error);
+    });
+  }
+
+  getPrivilegios(search: string, parametros: any) {
+    return this.http.get(this.url + "verPrivs", {
+      headers: this.headers,
+      params: new URLSearchParams(this.addUserParams(parametros)).toString() + "&search=" + search,
+    }).catch((error: Response) => {
+      if (error.status === 0) {
+        //Conexión reusada, no hay conexión con el servidor
+        alert(error.statusText)
       }
       else if (error.status === 500) {
         //Error interno del servidor

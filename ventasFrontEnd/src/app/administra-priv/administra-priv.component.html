@@ -1,0 +1,31 @@
+  <div class="color-ligth center" >
+    <form>
+      <input [(ngModel)]="user.name" name="nombre" class="txt" placeholder="Digite su usuario">
+    
+      <input (click)="login()" class="btn" type="submit" value="Ingresar" style="margin: auto">
+    </form>
+  </div>
+  <br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ROL</th>
+      <th>ADM</th>
+      <th>DEF</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let rol of roles , let adm of adms, let def of defs">
+      <td> {{rol}}</td>
+      <td> {{adm}}</td>
+      <td> {{def}}</td>
+      
+      <td>
+        <button class="btn btn-primary" (click)="leerCalificacion(respuesta.id,respuesta.matriz.id)">
+          <i class="fa fa-eye" aria-hidden="true"></i> Detalle
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

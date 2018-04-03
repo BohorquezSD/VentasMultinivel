@@ -3,6 +3,7 @@ import {ConexionOracleService} from './service/conexion-oracle.service'
 import { log } from 'util';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,16 +12,17 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 export class AppComponent implements OnInit {
 
   ngOnInit(): void {
-
+  
+ 
   }
-
+  public logged = false;  
   public user = {
     name: "",
     pass: "",
   };
-  public logged = false;
+  
   public texto: string = "";
-  public title = 'VENTAS MULTINIVEL';
+  public title = 'NATAME';
 
   public hora = new Date();
 
@@ -36,7 +38,20 @@ export class AppComponent implements OnInit {
     localStorage.removeItem("user");
     localStorage.removeItem("pass");
     this.logged = false;
+    this.backEnd.getLogout(null).subscribe(
+      respuesta => {
+        let jsonRespuesta = respuesta.json();
+        this.texto = jsonRespuesta.estado;
+        if (this.texto == "estado") {
+          alert("Estado \n" + this.texto);
+        } else {
+          alert("Estado \n" + this.texto);
+        }
+        this.isDBA();
+        this.user.name = "";
+        this.user.pass = "";
 
+      });
   }
   login() {
     this.backEnd.getLogin(this.user.name, this.user.pass).subscribe(

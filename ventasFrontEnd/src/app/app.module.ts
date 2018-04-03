@@ -13,6 +13,7 @@ import { RegistroVentaComponent } from './registro-venta/registro-venta.componen
 
 import { ConexionOracleService } from './service/conexion-oracle.service';
 import { AdministraPrivComponent } from './administra-priv/administra-priv.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AdministraPrivComponent } from './administra-priv/administra-priv.compo
     AppComponent,
     RegistroClienteComponent,
     RegistroVentaComponent,
-    AdministraPrivComponent
+    AdministraPrivComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
